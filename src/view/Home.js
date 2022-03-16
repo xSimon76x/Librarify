@@ -1,23 +1,31 @@
 import React from 'react';
-import { Text, View, TouchableHighlight, FlatList } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 import BookListItem from '../components/Book/BookListItem';
 
 const BOOK_LIST = [
     {
         id: 1,
         title: 'Hacia rutas salvajes',
+        cover: 'https://picsum.photos/200'
     },
     {
         id: 2,
         title: 'El nombre del viento',
+        cover: 'https://picsum.photos/200'
     },
     {
         id: 3,
         title: 'Extraño de la ceguera',
+        cover: 'https://picsum.photos/200'
     },
 ];
 
 export default function Home({ navigation }) {
+
+    function handleOnPress() {
+        navigation.navigate('Library');
+    }
+
     return (
         <View>
             {/* <Text> Soy Home</Text>
@@ -26,7 +34,7 @@ export default function Home({ navigation }) {
             </TouchableHighlight> */}
             <FlatList
                 data={BOOK_LIST}
-                renderItem={({ item }) => <BookListItem book={item} />}
+                renderItem={({ item }) => <BookListItem book={item} onPress={handleOnPress} />}
                 keyExtractor={item => item.id}
                 ListHeaderComponent={
                     <View>
