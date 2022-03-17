@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, FlatList } from 'react-native';
+
+
 import BookListItem from '../../components/Book/BookListItem';
+
+
+
+
 
 const BOOK_LIST = [
     {
@@ -44,6 +50,27 @@ const BOOK_LIST = [
 
 export default function BookList({ navigation }) {
 
+    const [data, setData] = useState(null)
+
+    useEffect(() => {
+        fetchData();
+    })
+
+    async function fetchData() {
+
+        const response = await fetch('https://www.etnassoft.com/api/v1/get/?category=libros_programacion&criteria=most_viewed');
+
+        const json = await response.json();
+
+        return setData(json);
+    }
+
+
+    if (data) {
+        console.log(data)
+    }
+
+
     function handleOnPress() {
         navigation.navigate('BooksDetail');
     }
@@ -54,15 +81,26 @@ export default function BookList({ navigation }) {
             <TouchableHighlight onPress={() => navigation.navigate('Library')}>
                 <Text> hacia library</Text>
             </TouchableHighlight> */}
-            <FlatList
-                data={BOOK_LIST}
-                renderItem={({ item }) => <BookListItem book={item} onPress={handleOnPress} />}
-                keyExtractor={item => item.id}
-                ListHeaderComponent={
-                    <View>
-                        <Text>---Mi lista de libros---</Text>
-                    </View>
-                }></FlatList>
+
+            {data ? (
+                <>
+                    <FlatList
+                        data={data}
+                        renderItem={({ item }) => <BookListItem book={item} onPress={handleOnPress} />}
+                        keyExtractor={item => item.Id}
+                        ListHeaderComponent={
+                            <View>
+                                <Text>---Mi lista de libros---</Text>
+                            </View>
+                        }></FlatList>
+                </>
+
+            ) : (
+                <>
+                    <Text>Cargando...</Text></>
+            )}
+
+
         </View>
     );
 }

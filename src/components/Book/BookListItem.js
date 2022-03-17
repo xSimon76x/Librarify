@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     icon: {
         marginLeft: "auto",
         marginRight: 20
+    },
+    text: {
+        width: 300
     }
 })
 
@@ -30,7 +33,7 @@ export default function BookListItem({ book, onPress }) {
         <TouchableOpacity onPress={onPress}>
             <View style={styles.container}>
                 <Image source={{ uri: book.cover }} style={styles.image}></Image>
-                <Text>{book.title}</Text>
+                <Text style={styles.text}>{book.title}</Text>
                 <Icon ios="ios-add" android="md-add" style={styles.icon} />
             </View>
         </TouchableOpacity>
