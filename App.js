@@ -7,23 +7,46 @@
  */
 
 import React from 'react';
-import { NavigationContainer } from "@react-navigation/native"
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Home from "./src/view/Home"
-import Library from "./src/view/Library"
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import BookList from './src/view/Library/BookList';
+import BooksDetail from './src/view/Library/BooksDetail';
+import AddBook from './src/view/AddBook/AddBook';
 
-const Stack = createStackNavigator();
+const LibraryStack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function LibraryStackScreen() {
+  return (
+    <LibraryStack.Navigator>
+      <LibraryStack.Screen
+        name="BookList"
+        component={BookList}
+        options={{ title: 'Inicio' }}
+      />
+      <LibraryStack.Screen
+        name="BooksDetail"
+        component={BooksDetail}
+      />
+    </LibraryStack.Navigator>
+  );
+}
 
 const App = () => {
-
   return (
 
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} options={{ title: 'Inicio' }} />
-        <Stack.Screen name="Library" component={Library} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="LibraryTab"
+          component={LibraryStackScreen}
+        />
+        <Tab.Screen name="AddBook" component={AddBook} />
+        {/* <Tab.Screen name="BooksDetail" component={BooksDetail} /> */}
+      </Tab.Navigator>
     </NavigationContainer>
+
   );
 };
 

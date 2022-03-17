@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, FlatList } from 'react-native';
-import BookListItem from '../components/Book/BookListItem';
+import BookListItem from '../../components/Book/BookListItem';
 
 const BOOK_LIST = [
     {
@@ -18,12 +18,34 @@ const BOOK_LIST = [
         title: 'Extraño de la ceguera',
         cover: 'https://picsum.photos/200'
     },
+    {
+        id: 4,
+        title: 'Extraño de la ceguera',
+        cover: 'https://picsum.photos/200'
+    },
+    {
+        id: 5,
+        title: 'Extraño de la ceguera',
+        cover: 'https://picsum.photos/200'
+    },
+    {
+        id: 6,
+        title: 'Extraño de la ceguera',
+        cover: 'https://picsum.photos/200'
+    },
+    {
+        id: 7,
+        title: 'Extraño de la ceguera',
+        cover: 'https://picsum.photos/200'
+    },
+
+
 ];
 
-export default function Home({ navigation }) {
+export default function BookList({ navigation }) {
 
     function handleOnPress() {
-        navigation.navigate('Library');
+        navigation.navigate('BooksDetail');
     }
 
     return (

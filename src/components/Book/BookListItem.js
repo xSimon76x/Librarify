@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
 })
 
 export default function BookListItem({ book, onPress }) {
+    console.log("ss")
 
     return (
         <TouchableOpacity onPress={onPress}>
