@@ -8,7 +8,7 @@ export default function ListIntermedioBlist_BlistItem({navigation}) {
   // const [data, setData] = useState(null)
 
   const {isSuccess, isLoading, data} = useLibraryContext();
-
+  console.log(data);
   function handleOnPress() {
     navigation.navigate('BooksDetail');
   }

@@ -8,15 +8,28 @@ export default LibraryContext;
 const GET_BOOKS = 'GET_BOOKS';
 
 async function fetchData() {
-  const response = await fetch(
-    'https://www.etnassoft.com/api/v1/get/?category=libros_programacion&criteria=most_viewed',
-  );
+  const url =
+    'https://www.etnassoft.com/api/v1/get/?category=libros_programacion&criteria=most_viewed';
+  // const response = await fetch(url);
+  await fetch(url, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      return data;
+    })
+    .catch(err => console.error(err));
 
-  const jsonAPI = await response.json();
-
-  return jsonAPI;
+  // const jsonAPI = await response.json();
+  // console.log(response);
+  // return jsonAPI;
 }
-
+console.log('API ', fetchData());
 export function LibraryContextProvider({children}) {
   const {isSuccess, isLoading, data} = useQuery(GET_BOOKS, fetchData);
 
